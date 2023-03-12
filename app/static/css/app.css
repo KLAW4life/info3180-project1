@@ -27,3 +27,7 @@ h1{
 .photo{
     padding-top: 10px;
 }
+
+.card-text.text-muted{
+    padding-bottom: 20px;
+}
