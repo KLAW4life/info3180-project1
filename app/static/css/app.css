@@ -1,3 +1,29 @@
 body {
     padding-top: 5rem;
+    background-color: rgba(207, 206, 206, 0.58);
+}
+
+.form_container{
+    padding: 30px;
+    background-color: white;
+}
+
+h1{
+    padding: 10px;
+}
+
+.form-label.fw-bold{
+    padding: 5px;
+}
+
+#button.col-md-12.mt-2{
+    padding-top: 20px;
+}
+
+.location{
+    padding-top: 10px;
+}
+
+.photo{
+    padding-top: 10px;
 }

@@ -4,9 +4,12 @@ Jinja2 Documentation:    https://jinja.palletsprojects.com/
 Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
-
+import os
 from app import app,db
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from werkzeug.utils import secure_filename
+from app.forms import PropertyForm
+from app.models import PropertyPortfolio
 
 
 ###
@@ -22,8 +25,38 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Kerene Wright")
 
+@app.route('/property/create', methods=['POST','GET'])
+def property():
+    
+    form = PropertyForm()
+    if form.validate_on_submit():
+        photo = form.photo.data
+        title = form.title.data
+        description = form.description.data
+        bedroom = form.bedroom.data
+        bathroom = form.bathroom.data
+        price = form.price.data
+        type = form.type.data
+        location = form.location.data
+
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        new_property = PropertyPortfolio(title, description, bedroom, bathroom, price, type, location, filename) 
+        db.session.add(new_property)
+        db.session.commit()    
+        flash('Property Information Successfully Added!', 'success')
+        return redirect(url_for('properties'))
+    
+    flash_errors(form)
+    return render_template('new_property.html', form=form)
+
+@app.route('/properties')
+def properties():
+    property = PropertyPortfolio.query.all()
+    return render_template('properties.html', property=property)
 
 ###
 # The functions below should be applicable to all Flask apps.
