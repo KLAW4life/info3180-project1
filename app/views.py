@@ -71,6 +71,10 @@ def flash_errors(form):
                 error
             ), 'danger')
 
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), filename)
+
 @app.route('/<file_name>.txt')
 def send_text_file(file_name):
     """Send your static text file."""
