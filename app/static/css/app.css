@@ -31,3 +31,16 @@ h1{
 .card-text.text-muted{
     padding-bottom: 20px;
 }
+
+span.bedroom{
+    padding-right: 10px;
+}
+
+p.card-text{
+    padding-top: 20px;
+}
+
+input#title.form-control{
+    padding-left: 100px;
+
+}

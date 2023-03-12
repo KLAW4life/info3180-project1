@@ -58,6 +58,11 @@ def properties():
     property = PropertyPortfolio.query.all()
     return render_template('properties.html', property=property)
 
+@app.route('/property/<property_id>')
+def view_property(property_id):
+    this_property = PropertyPortfolio.query.filter_by(id=property_id).first()
+    return render_template('specific_property.html', property=this_property)
+
 ###
 # The functions below should be applicable to all Flask apps.
 ###

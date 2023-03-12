@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/app.css')}}" />
+{% endblock %}
+
+{% block main %}
+
+<div class="card mb-3 col-8 mx-auto mt-5 mb-5">
+    <div class="row g-0">
+        <div class="col-md-5">
+            <img style="height: 100%;" src="{{ url_for('get_image', filename = property.photo) }}" alt="Image of Property" class="img-fluid rounded-start" >
+        </div>
+        <div class="col-md-7">
+            <div class="card-body">
+                <h5 class="card-title">{{ property.title }}</h5>
+                <div class="d-grid gap-2 d-md-block my-3">
+                    <button class="btn px-3 btn-sm btn-primary rounded-pill" type="button">$ {{ "{:,.2f}".format(property.price) }}</button>
+                    <button class="mx-2 px-3 btn-sm btn btn-warning rounded-pill" type="button">{{ property.type }}</button>
+                </div>
+                <p class="card-text">{{ property.description }}</p>
+
+                <section class="bbrooms">
+                    <span class="bedroom"><img class="bed_img" src="{{url_for('static', filename='icons/bedroom_icon.png')}}" alt="Bedroom Icon" /> {{ property.bedroom }} Bedrooms </span>
+                    <span class="bathroom"><img class="bath_img" src="{{url_for('static', filename='icons/bathroom_icon.png')}}" alt="Bathroom Icon" /> {{ property.bathroom }} Bathrooms</span>
+                </section>
+
+                <p class="card-text"> <img class="icon" src="{{url_for('static', filename='icons/location-icon.png') }}" alt="Location Icon image" /> {{ property.location }} </p>
+                <button style="background-color: var(--bs-teal);" class="mb-0 px-3 btn" type="button">Email Realtor</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
